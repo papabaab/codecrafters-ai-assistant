@@ -1,9 +1,10 @@
 import { Injectable } from '@nestjs/common';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import 'dotenv/config';
-import { GENERATION_CONFIG, MODEL_NAME, SAFETY_SETTINGS, SYSTEM_INSTRUCTIONS } from './ai-configs/configs.ai';
+// import { GENERATION_CONFIG, MODEL_NAME, SAFETY_SETTINGS, SYSTEM_INSTRUCTIONS } from './ai-configs/configs.ai';
 import { ChatService } from './chats/chat.service';
 import { AiConfigsService } from './ai-configs/ai-configs.service';
+import { AiConfigs } from './ai-configs/ai-configs.dto';
 
 const API_KEY = process.env.GEMINI_API_KEY;
 
@@ -13,26 +14,27 @@ export class AppService {
   async getHello() {
     // TESTING AI SERVICE
 
+    const result = await this.aiConfigs.getConfig()
 
     // RUNNING CHAT
-    this.run();
+    this.run(result);
     return 'hello configs test';
   }
 
 
 
-  async run() {
+  async run(CONFIGS?:AiConfigs) {
     console.log('APP SERVICE: RUN METHOD TO TEST GEMINI ---->');
     const genAI = new GoogleGenerativeAI(API_KEY);
     const model = genAI.getGenerativeModel({
-      model: MODEL_NAME,
-      systemInstruction: SYSTEM_INSTRUCTIONS,
+      model: CONFIGS.MODEL_NAME,
+      systemInstruction: CONFIGS.SYSTEM_INSTRUCTIONS,
     });
 
     const chat = model.startChat({
       history: await this.chatService.getChatHistory('1765456789'),
-      generationConfig: GENERATION_CONFIG,
-      safetySettings: SAFETY_SETTINGS
+      generationConfig: CONFIGS.GENERATION_CONFIG,
+      safetySettings: CONFIGS.SAFETY_SETTINGS
     });
 
 
