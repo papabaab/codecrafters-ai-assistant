@@ -26,4 +26,11 @@ export class ChatService {
         return chatHistory 
     }
 
+
+    async updateChatHistory(loanId: string, chatHistory: Content[]) {
+        const result = await this.chatModel.findOneAndUpdate({ loanId: loanId }, { chatHistory: chatHistory }, { new: true })
+        console.log('AI SETTINGS: chat history', result)
+        return result
+    }
+
 }
