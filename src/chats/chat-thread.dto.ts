@@ -6,8 +6,8 @@ import { Content } from '@google/generative-ai';
 
 export type ChatThread = {
     id?: string;
-    chatHistory: Content[];
-    userId: string;
+    chatHistory?: Content[];
+    clientId: string;
     loanId: string;
 }
 
@@ -22,7 +22,7 @@ export class ChatThreadDto extends Document{
     chatHistory: Content[]
 
     @Prop({type: String, nullable: true})
-    userId: string
+    clientId: string
 
     @Prop({type: String, nullable: true})
     loanId: string

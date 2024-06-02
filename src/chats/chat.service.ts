@@ -3,6 +3,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
 import { ChatThreadDto, ChatThread } from './chat-thread.dto';
+import { AiConfigsService } from 'src/ai-configs/ai-configs.service';
 
 
 
@@ -10,11 +11,20 @@ import { ChatThreadDto, ChatThread } from './chat-thread.dto';
 export class ChatService {
 
 
-    constructor(@InjectModel(ChatThreadDto.name) private chatModel: Model<ChatThreadDto>) {}
+    constructor(@InjectModel(ChatThreadDto.name) private chatModel: Model<ChatThreadDto> , 
+    private aiConfigsService: AiConfigsService) {}
 
 
-    async createChat(chatHistory: ChatThread) {
-          const result = await this.chatModel.create(chatHistory)
+
+    // CRÉEER UN NOUVEAU CHAT THREAD POUR ENREGISTRER LES INTÉRACTIONS ENTRE LE CLIENT ET L'IA
+    /**
+     * 
+     * @param chatThread 
+     * @description Cette fonction permet de creer un nouveau chat
+     * @returns 
+     */
+    async createChatThread(chatThread: ChatThread) {
+          const result = await this.chatModel.create(chatThread)
           return result
     }
 
@@ -31,6 +41,15 @@ export class ChatService {
         const result = await this.chatModel.findOneAndUpdate({ loanId: loanId }, { chatHistory: chatHistory }, { new: true })
         console.log('AI SETTINGS: chat history', result)
         return result
+    }
+
+
+    async startChat(loanId: string) {
+        return this.aiConfigsService.AI_MODEL.startChat({
+            history: await this.getChatHistory(loanId),
+            generationConfig: this.aiConfigsService.CONFIGS.GENERATION_CONFIG,
+            safetySettings: this.aiConfigsService.CONFIGS.SAFETY_SETTINGS
+          });
     }
 
 }
