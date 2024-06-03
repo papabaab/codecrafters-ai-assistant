@@ -1,4 +1,4 @@
-import { Content } from '@google/generative-ai';
+import { ChatSession, Content } from '@google/generative-ai';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -10,6 +10,7 @@ import { AiConfigsService } from 'src/ai-configs/ai-configs.service';
 @Injectable()
 export class ChatService {
 
+    private chatSession: ChatSession
 
     constructor(@InjectModel(ChatThreadDto.name) private chatModel: Model<ChatThreadDto> , 
     private aiConfigsService: AiConfigsService) {}
@@ -44,12 +45,15 @@ export class ChatService {
     }
 
 
-    async startChat(loanId: string) {
-        return this.aiConfigsService.AI_MODEL.startChat({
+    async getChat(loanId: string) {
+        if(this.chatSession) return this.chatSession
+        this.chatSession =  await this.aiConfigsService.AI_MODEL.startChat({
             history: await this.getChatHistory(loanId),
             generationConfig: this.aiConfigsService.CONFIGS.GENERATION_CONFIG,
             safetySettings: this.aiConfigsService.CONFIGS.SAFETY_SETTINGS
           });
+
+        return this.chatSession
     }
 
 }

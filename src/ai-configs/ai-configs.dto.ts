@@ -1,7 +1,7 @@
 import { Part, Content, SafetySetting } from "@google/generative-ai";
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import {  Document } from "mongoose";
-import { SAFETY_SETTINGS, GENERATION_CONFIG, MODEL_NAME, SYSTEM_INSTRUCTIONS } from "./configs.ai";
+import { SAFETY_SETTINGS, GENERATION_CONFIG, MODEL_NAME, SYSTEM_INSTRUCTIONS } from "./default-configs.ai";
 
 
 
