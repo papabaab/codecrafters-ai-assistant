@@ -1,8 +1,9 @@
 
 import { Body, Controller, Param, Post } from '@nestjs/common';
 import { AppService } from './app.service';
-import { EventPattern } from '@nestjs/microservices';
+import { MessagePattern } from '@nestjs/microservices';
 import { ChatThread } from './chats/chat-thread.dto';
+import { ILoan } from './shared/loan.dto';
 
 @Controller('assistant')
 export class AppController {
@@ -10,26 +11,33 @@ export class AppController {
 
 
 
+  /**
+   * 
+   * @param createdLoan `ILoan`
+   * @description cette fonction permet de traiter les nouvelles demandes de prêts
+   * @returns 
+   */
 
-  @EventPattern('loan_created')
-  async onLoanCreated(createdLoan: any) {
+  @MessagePattern({cmd: 'loan_created'})
+  async onLoanCreated(createdLoan: ILoan) {
     console.log('APP CONTROLLER: onLoanCreated ---->', createdLoan);
     const chatThread : ChatThread = {
-      loanId: createdLoan.id,
+      loanId: createdLoan._id,
       clientId: createdLoan.userId,
     }
     console.log('CHAT HISTORY OF NEW LOAN: ', chatThread);
     const result = await this.appService.createChatThread(chatThread);
     console.log('APP CONTROLLER: CHAT THREAD CREATED ---->', result);
-    return await this.appService.respondToClient(createdLoan.id, JSON.stringify(createdLoan));
+    return this.appService.analyzeLoanRequest(createdLoan._id, JSON.stringify(createdLoan));
   }
+
 
 
 
   @Post(':loanId')
   respondToClient(@Param() loanId: string, @Body() clientMessage?: string) {
     console.log('APP CONTROLLER: RUN METHOD TO TEST GEMINI ---->', loanId, clientMessage);
-    return this.appService.respondToClient(loanId, clientMessage);
+    return this.appService.analyzeLoanRequest(loanId, clientMessage);
   }
 }
 

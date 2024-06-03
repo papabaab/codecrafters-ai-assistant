@@ -1,4 +1,4 @@
-import { ChatSession, Content } from '@google/generative-ai';
+import { ChatSession, Content, GenerateContentRequest } from '@google/generative-ai';
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Model } from 'mongoose';
@@ -32,7 +32,7 @@ export class ChatService {
 
     async getChatHistory(loanId: string) {
         const result = await this.chatModel.findOne({ loanId: loanId })
-        console.log('AI SETTINGS: chat history', result)
+        console.log('CHAT SERVICE: get chat history', result)
         const chatHistory : Content[] = result['chatHistory']
         return chatHistory 
     }
@@ -40,20 +40,34 @@ export class ChatService {
 
     async updateChatHistory(loanId: string, chatHistory: Content[]) {
         const result = await this.chatModel.findOneAndUpdate({ loanId: loanId }, { chatHistory: chatHistory }, { new: true })
-        console.log('AI SETTINGS: chat history', result)
+        console.log('CHAT SERVICE: chat history updated', result)
         return result
     }
 
 
     async getChat(loanId: string) {
+        console.log("CHAT SERVICE: GET CHAT", loanId)
         if(this.chatSession) return this.chatSession
+        console.log('CHAT SERVICE": chat session not created yet. Creating new one from', this.aiConfigsService.CONFIGS.MODEL_NAME)
+        const chatHistory = await this.getChatHistory(loanId)
         this.chatSession =  await this.aiConfigsService.AI_MODEL.startChat({
-            history: await this.getChatHistory(loanId),
+            history: chatHistory,
             generationConfig: this.aiConfigsService.CONFIGS.GENERATION_CONFIG,
             safetySettings: this.aiConfigsService.CONFIGS.SAFETY_SETTINGS
           });
 
         return this.chatSession
+    }
+
+
+
+    async analyzeLoanRequest(id: string, loanRequest:string){
+        console.log("CHAT SERVICE: ANALYZE LOAN REQUEST", loanRequest)
+        const contentRequest : GenerateContentRequest = {contents: [this.aiConfigsService.CONFIGS.SYSTEM_INSTRUCTIONS as Content, {role: 'user', parts: [{text: loanRequest}]}]};
+        const {response} = await this.aiConfigsService.AI_MODEL.generateContent(contentRequest)
+        const chatHistory = [...contentRequest.contents, {role: 'model', parts: [{text: response.text()}]}] as Content[]
+        await this.updateChatHistory(id, chatHistory)
+        return response
     }
 
 }
