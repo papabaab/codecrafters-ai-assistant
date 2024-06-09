@@ -1,11 +1,12 @@
 
-import { Body, Controller, Param, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { AppService } from './app.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { ChatThread } from './chats/chat-thread.dto';
 import { ILoan } from './shared/loan.dto';
+import { AiConfigsDto } from './ai-configs/ai-configs.dto';
 
-@Controller('assistant')
+@Controller('')
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
@@ -34,11 +35,27 @@ export class AppController {
 
 
 
-  @Post(':loanId')
-  respondToClient(@Param() loanId: string, @Body() clientMessage?: string) {
-    console.log('APP CONTROLLER: RUN METHOD TO TEST GEMINI ---->', loanId, clientMessage);
-    return this.appService.analyzeLoanRequest(loanId, clientMessage);
+  @Post('configs')
+  updateConfigs(@Body() configs?: AiConfigsDto) {
+    console.log('APP CONTROLLER: RUN METHOD TO TEST GEMINI ---->', configs);
+    return this.appService.updateAiConfigs(configs);
   }
+
+
+  @Get('configs')
+  async getConfigs() {
+    console.log('APP CONTROLLER: get configs of the AI ---->');
+    const result = await this.appService.getAiConfigs();
+    console.log('APP CONTROLLER: get configs of the AI ---->', result);
+    return result
+  }
+
+
+
+
+
+
+
 }
 
 

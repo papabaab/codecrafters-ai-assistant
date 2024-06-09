@@ -42,4 +42,11 @@ export class AiConfigsService {
     //     console.log('AI CONFIGS SERVICE: setConfig: result: ', result);
     //     return result;
     // }
+
+    async getConfig() {
+        console.log('AI CONFIGS SERVICE: getConfig: ');
+        const result = await this.aiConfigsModel.find() as AiConfigs[];
+        console.log('AI CONFIGS SERVICE: getConfig: result: ', result);
+        return result[0];
+    }
 }

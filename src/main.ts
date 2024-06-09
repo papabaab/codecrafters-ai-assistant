@@ -12,6 +12,6 @@ async function bootstrap() {
     },
   });
   await app.startAllMicroservices() //setting up hybrid mode
-  await app.listen(3001);
+  await app.listen(3003); // setting up local mode
 }
 bootstrap();
