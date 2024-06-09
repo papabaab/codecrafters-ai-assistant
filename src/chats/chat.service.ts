@@ -50,7 +50,7 @@ export class ChatService {
         if(this.chatSession) return this.chatSession
         console.log('CHAT SERVICE": chat session not created yet. Creating new one from', this.aiConfigsService.CONFIGS.MODEL_NAME)
         const chatHistory = await this.getChatHistory(loanId)
-        this.chatSession =  await this.aiConfigsService.AI_MODEL.startChat({
+        this.chatSession = this.aiConfigsService.AI_MODEL.startChat({
             history: chatHistory,
             generationConfig: this.aiConfigsService.CONFIGS.GENERATION_CONFIG,
             safetySettings: this.aiConfigsService.CONFIGS.SAFETY_SETTINGS

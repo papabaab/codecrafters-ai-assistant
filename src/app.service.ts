@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { ChatService } from './chats/chat.service';
 import { ChatThread } from './chats/chat-thread.dto';
 import { AiConfigsService } from './ai-configs/ai-configs.service';
-import { AiConfigsDto } from './ai-configs/ai-configs.dto';
+import { AiConfigs } from './ai-configs/ai-configs.dto';
 
 
 @Injectable()
@@ -23,7 +23,7 @@ createChatThread(chatThread: ChatThread) {
 
 
 
-  async updateAiConfigs(configs: AiConfigsDto) {
+  async updateAiConfigs(configs: AiConfigs) {
     console.log('APP SERVICE: updateAiConfigs: ', configs);
     return this.aiConfigsService.updateConfig(configs)
   }

@@ -5,6 +5,7 @@ import { Transport } from '@nestjs/microservices';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
   app.setGlobalPrefix('ai'); // setting global prefix to ai ==> localhost:3001/ai
+  app.enableCors()
   app.connectMicroservice({
     transport: Transport.TCP,
     options: {

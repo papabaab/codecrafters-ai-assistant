@@ -1,10 +1,10 @@
 
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Put } from '@nestjs/common';
 import { AppService } from './app.service';
 import { MessagePattern } from '@nestjs/microservices';
 import { ChatThread } from './chats/chat-thread.dto';
 import { ILoan } from './shared/loan.dto';
-import { AiConfigsDto } from './ai-configs/ai-configs.dto';
+import { AiConfigs } from './ai-configs/ai-configs.dto';
 
 @Controller('')
 export class AppController {
@@ -35,8 +35,8 @@ export class AppController {
 
 
 
-  @Post('configs')
-  updateConfigs(@Body() configs?: AiConfigsDto) {
+  @Put('configs')
+  updateConfigs(@Body() configs?: AiConfigs) {
     console.log('APP CONTROLLER: RUN METHOD TO TEST GEMINI ---->', configs);
     return this.appService.updateAiConfigs(configs);
   }
