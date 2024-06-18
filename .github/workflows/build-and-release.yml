@@ -24,12 +24,10 @@ jobs:
         registry: docker.io
         login: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
-        tags: |
-          type=semver,pattern={{version}}
-          
-    - name: Deploy to render with webhook
-      uses: indiesdev/curl@v1.1
-      with: 
-        url: ${{ secrets.RENDER_DEPLOY_HOOK }}
+        
+    - name: Deploy to render
+      uses: sozo-design/curl@v1.0.2
+      with:
+        args: ${{ secrets.RENDER_DEPLOY_HOOK }}
     
 
