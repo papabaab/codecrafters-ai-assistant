@@ -52,6 +52,15 @@ export class AppController {
 
 
 
+  @Post('interview')
+  async respondToClient(@Body('loanId') loanId: string, @Body('clientMessage') clientMessage: string){
+    console.log("APP CONTROLLER: ---> respondToClient method: ", loanId)
+    const result = await this.appService.respondToClient(loanId, clientMessage)
+    console.log('APP CONTROLLER ----> response of ai assistant: ', result)
+    return result;
+  }
+
+
 
 
 

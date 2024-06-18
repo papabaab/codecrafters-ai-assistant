@@ -31,7 +31,7 @@ export class AiConfigsDto extends Document{
     @Prop({type : GenerationConfig, nullable: true, default: GENERATION_CONFIG})
     GENERATION_CONFIG: GenerationConfig
 
-    @Prop({type: [Object], nullable: true, default: SYSTEM_INSTRUCTIONS})
+    @Prop({type: Object, nullable: true, default: SYSTEM_INSTRUCTIONS})
     SYSTEM_INSTRUCTIONS?: Part | Content
 
     @Prop({type: [Object], nullable: true, default: SAFETY_SETTINGS})

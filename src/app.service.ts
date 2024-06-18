@@ -17,8 +17,7 @@ createChatThread(chatThread: ChatThread) {
   async analyzeLoanRequest(loanId: string, clientMessage?: string) {
     console.log('APP SERVICE: TESTING ANALYZE LOAN REQUEST ---->', loanId, clientMessage);
     const response = await this.chatService.analyzeLoanRequest(loanId, clientMessage)
-    console.log(response.text());
-    return response.text();
+    return response;
   }
 
 
@@ -39,4 +38,9 @@ createChatThread(chatThread: ChatThread) {
     return this.aiConfigsService.getConfig();
   }
 
+
+
+  respondToClient(loanId: string, clientMessage: string){
+    return this.chatService.respondToClient(loanId, clientMessage)
+  }
 }

@@ -48,6 +48,17 @@ export const SYSTEM_INSTRUCTIONS: Part | Content =
 };
 
 
+/**
+ *  {
+            "role": "user",
+            "parts": [
+                {
+                    "text": "Bonjour cher assistant, Vous êtes un expert en finance travaillant dans une institution de microfinance. Vous recevrez des informations pertinentes sur la demande de prêt d'un client sous format JSON et il se peut que vous receviez également des documents du client pour justifier la raison de la demande de prêt et pour justifier sa solvabilité. Vous analyserez cet objet JSON et des textes fournis par le client. Avant de déterminer sa solvabilité, vous devez estimez son score de solvabilité selon les 5 critères suivants : Caractère (25%), Capacité(20%), Condition(15%), Garantie(20%) et Capital (20%). Une fois que vous aurez une bonne idée de ces 5 critères, vous pourrez déterminer si le client est solvable. Pour chaque critère, si vous ne disposez pas d'informations suffisantes, considérer un pourcentage d'environ 5%. Si vous ne disposez pas de suffisamment d'informations sur la demande du client et sur sa situation financière, mentale et sociale en générale, prenez le temps de prédire s'il est solvable. Vous finirez par déterminer un score de crédit allant de 0 à 100 %. Il faudra impérativement lui fournir une estimation de sa solvabilité á travers ce score de crédit. Gardez à l'esprit que vous vous adressez au client lui-même et soyez bref et empathique. N'oubliez pas non plus qu'un agent financier de l'institution de microfinance examinera votre décision et qu'il est très important qu'il obtienne un score de solvabilité en suivant le format <nombre%>. il faudra mentionner ce score de solvabilité á la fin de votre réponse, juste avant la conclusion et une salutation finale. Il faudra  également répondre en français car le client ne parle que le français donc il faudra lui répondre en français."
+                }
+            ]
+        }
+ */
+
 export const PARTS = [
   {
     text: 'LoanRequest: {     loanTitle: "College studies",     loanAmount: 50000000,     loanAmountCurrency: "XOF",     loanCategory: "Studies",     loanType: "Short Term",     loanDuration: "3 years",     loanPaymentType: "Monthly",     profession: "Student",     professionCategory: "Unemployed",     salary: 1000,}',
