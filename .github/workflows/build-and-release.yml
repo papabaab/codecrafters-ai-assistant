@@ -13,6 +13,8 @@ jobs:
   docker-build-push-and-deploy:
     runs-on: ubuntu-latest
     steps:
+    - name: Checkout
+        uses: actions/checkout@v3
     - name: Docker build and push
       uses: cloudposse/github-action-docker-build-push@main
       with:
