@@ -13,13 +13,13 @@ jobs:
   docker-build-push-and-deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Docker Login
+    - name: Docker build and push
       uses: cloudposse/github-action-docker-build-push@1.16.0
       with:
         organization: papabaab
         repository: codecrafter-ai
         registry: docker.io
-        workdir: ../../
+        workdir: ../../.
         login: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: |
