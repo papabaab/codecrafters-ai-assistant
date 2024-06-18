@@ -1,0 +1,32 @@
+# This workflow will do a clean installation of node dependencies, cache/restore them, build the source code and run tests across different versions of node
+# For more information see: https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-nodejs
+
+name: CI/CD to render.com
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  docker-build-push-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Docker Login
+      uses: cloudposse/github-action-docker-build-push@1.16.0
+      with:
+        organization: papabaab
+        repository: codecrafter-ai
+        registry: docker.io
+        login: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        tags: |
+          type=semver,pattern={{version}}
+          
+    - name: Deploy to render with webhook
+      uses: indiesdev/curl@v1.1
+      with: 
+        url: ${{ secrets.RENDER_DEPLOY_HOOK }}
+    
+
