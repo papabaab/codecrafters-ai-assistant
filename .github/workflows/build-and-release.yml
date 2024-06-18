@@ -19,7 +19,6 @@ jobs:
         organization: papabaab
         repository: codecrafter-ai
         registry: docker.io
-        file: ../../Dockerfile
         login: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
         tags: |
