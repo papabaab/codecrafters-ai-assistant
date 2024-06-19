@@ -82,7 +82,7 @@ export class ChatService {
         const generatedContent = await chat.sendMessage(clientMessage)
         const chatHistory = await chat.getHistory()
         await this.updateChatHistory(loanId, chatHistory)
-        return generatedContent.response.text()
+        return {response : generatedContent.response.text()}
         
     }
 
