@@ -35,6 +35,7 @@ export class AppController {
 
 
 
+  @MessagePattern({cmd: 'updateConfigs'})
   @Put('configs')
   updateConfigs(@Body() configs?: AiConfigs) {
     console.log('APP CONTROLLER: RUN METHOD TO TEST GEMINI ---->', configs);
@@ -42,6 +43,7 @@ export class AppController {
   }
 
 
+  @MessagePattern({cmd: 'getConfigs'})
   @Get('configs')
   async getConfigs() {
     console.log('APP CONTROLLER: get configs of the AI ---->');
@@ -52,6 +54,7 @@ export class AppController {
 
 
 
+  @MessagePattern({cmd: 'respondToClient'})
   @Post('interview')
   async respondToClient(@Body('loanId') loanId: string, @Body('clientMessage') clientMessage: string){
     console.log("APP CONTROLLER: ---> respondToClient method: ", loanId)
