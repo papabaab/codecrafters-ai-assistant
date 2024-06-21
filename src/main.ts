@@ -9,11 +9,11 @@ async function bootstrap() {
   app.connectMicroservice({
     transport: Transport.TCP,
     options: {
-      port: 3001,
+      port: Number(process.env.AI_MICROSERVICE_PORT),
     },
   });
   await app.startAllMicroservices() //setting up hybrid mode
-  await app.listen(3003); // setting up local mode
-  console.log('AI ASSISTANT HYBRID SERVICE STARTED ON PORT: ', 3003)
+  await app.listen(process.env.AI_PORT); // setting up local mode
+  console.log('AI ASSISTANT HYBRID SERVICE STARTED ON PORT: ', process.env.AI_PORT)
 }
 bootstrap();
