@@ -22,6 +22,7 @@
 <img height = "100" alt = "MongoDb" src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.7DfPlLIngzN5xxUvcc4tUgHaCO%26pid%3DApi&f=1&ipt=6cfdd6ab0738d230423420b3fe423e52a937752c5fd51c21b8ca8be4f9381b7e&ipo=images"> <img height = "100" alt = "Typescript" src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.8qyBBxhvUiHHggSAU090uwHaDw%26pid%3DApi&f=1&ipt=c3f67a33583f84b97cec1d5b1b531a5a7209a587fb8237e614219eb4813e9d93&ipo=images"> 
 
 <img height = "100" alt = "Nest.js" src="https://nestjs.com/img/logo-small.svg">
+<img height = "100" alt = "google ai studio" src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.-8bdkqiQMDnG0SI71JlxtwHaD4%26pid%3DApi&f=1&ipt=529d2fe421251a4c3c683af6ba618a92b8e3bf8b2956ee4086ea55ae88de92fa&ipo=images">
 </div>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
