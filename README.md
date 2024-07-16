@@ -17,10 +17,12 @@
 > Une fois que vous aurez une bonne idée de ces 5 critères, vous pourrez déterminer si le client est solvable. Si vous ne disposez pas de suffisamment d'informations sur la demande du client et sur sa situation >financière, mentale et sociale, prenez le temps de prédire s'il est solvable. Vous finirez par déterminer un score de crédit allant de 0 à 100 %. Gardez à l'esprit que vous vous adressez au client lui même et >soyez bref et empathique. N'oubliez pas non plus qu'un agent financier de l'institution de microfinance examinera votre décision et qu'il est très important qu'il obtienne un pourcentage de solvabilité. >Il >faudra répondre en français car le client ne parle que le le français.
 
 
-## Framework Used: 
-<p>
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="100" alt="Nest Logo" /></a>
-</p>
+## technologies used: 
+<div align="center">
+<img height = "100" alt = "MongoDb" src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.7DfPlLIngzN5xxUvcc4tUgHaCO%26pid%3DApi&f=1&ipt=6cfdd6ab0738d230423420b3fe423e52a937752c5fd51c21b8ca8be4f9381b7e&ipo=images"> <img height = "100" alt = "Typescript" src = "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Ftse3.mm.bing.net%2Fth%3Fid%3DOIP.8qyBBxhvUiHHggSAU090uwHaDw%26pid%3DApi&f=1&ipt=c3f67a33583f84b97cec1d5b1b531a5a7209a587fb8237e614219eb4813e9d93&ipo=images"> 
+
+<img height = "100" alt = "Nest.js" src="https://nestjs.com/img/logo-small.svg">
+</div>
 
 [circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
 [circleci-url]: https://circleci.com/gh/nestjs/nest
