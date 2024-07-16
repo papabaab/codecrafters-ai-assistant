@@ -1,0 +1,4 @@
+GEMINI_API_KEY={GEMINI_API_KEY}
+MONGODB_URL=mongodb+srv://{username}:{password}@cluster0.db9y0dn.mongodb.net/
+AI_PORT=3003
+AI_MICROSERVICE_PORT=3001
